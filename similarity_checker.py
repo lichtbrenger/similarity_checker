@@ -14,11 +14,9 @@ def parse_chosen_databases():
     return args.vulndb.split(',')
 
 def get_url(database_name):
-    database_1 = args.vulndb.split(',')[0]
-    database_2 = args.vulndb.split(',')[1]
     databases = csv.reader(open('database', 'r'), delimiter=',')
     for database in databases:
-        if database_1 == database[0]:
+        if database_name == database[0]:
             return database[1]
 
 
@@ -53,7 +51,6 @@ def calculate_similarity(set_a, set_b):
 # result = calculate_similarity(set_a, set_b)
 def lets_go():
     databases = parse_chosen_databases()
-    import pdb;pdb.set_trace()
     for database in databases:
         url = get_url(database)
         get_vlndb(url)
@@ -62,15 +59,19 @@ def lets_go():
     databases = glob.glob('./vlndb*')
     for database in databases:
         cves.append(find_cves(database))
+    
+    simis = []
+    for base_cve in range(len(cves)-1):
+        i = base_cve + 1
+        for index in range(len(cves)):
+            if not (i >= len(cves)):
+                simis.append(calculate_similarity(cves[base_cve], cves[i]))
+            i += 1
 
-    print(calculate_similarity(cves[0],cves[1]))
+    print(simis)
 
 parser = argparse.ArgumentParser(description='Checks image and generates report accordingly')
 parser.add_argument('--vulndb','-db', type=str,
                     help='Specifies the vulnerability database to be used')
-parser.add_argument('--image','-i', type=str,
-                    help='Specifies which image should be scanned')
-parser.add_argument('--version','-v', nargs='?', const='arg_was_not_given', 
-                    help='Optionally, provide an image_version')
 args = parser.parse_args()
 lets_go()
