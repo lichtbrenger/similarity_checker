@@ -1,2 +1,14 @@
 alpine,https://secdb.alpinelinux.org/edge/main.json
+redhat,https://access.redhat.com/hydra/rest/securitydata/cve.json
+debian,https://security-tracker.debian.org/tracker/data/json
+photon,https://packages.vmware.com/photon/photon_cve_metadata/cve_data_photon5.0.json
+rocky,https://osv-vulnerabilities.storage.googleapis.com/Rocky%20Linux:9/all.zip
 amazon,https://alas.aws.amazon.com/AL2/alas.rss
+golang,https://vuln.go.dev/index/vulns.json
+rust,https://osv-vulnerabilities.storage.googleapis.com/crates.io/all.zip
+python,https://osv-vulnerabilities.storage.googleapis.com/PyPI/all.zip
+nuget,https://osv-vulnerabilities.storage.googleapis.com/NuGet/all.zip
+composer,https://osv-vulnerabilities.storage.googleapis.com/Packagist/all.zip
+ruby,https://osv-vulnerabilities.storage.googleapis.com/RubyGems/all.zip
+elixer,https://osv-vulnerabilities.storage.googleapis.com/Hex/all.zip
+maven.https://osv-vulnerabilities.storage.googleapis.com/Maven/all.zip
