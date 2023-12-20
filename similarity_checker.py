@@ -25,6 +25,18 @@ def get_vlndb(url):
     os.system(f'curl {url} -o vlndb_{i}')
     i += 1
 
+def unpack_vlndb():
+    try:
+        global i
+        proc = subprocess.run([f'unzip vlndb_{i}'], shell=True, check=True, stdout=subprocess.PIPE)
+        import pdb;pdb.set_trace()
+        os.system(f'rm vlndb_{i}')
+        os.system(f'mkdir vlndb_{i}')
+        os.system(f'mv *.json ./vln_db{i}')
+        i += 1
+    except:
+        i += 1
+        pass 
 
 def find_cves(report):
     f = open(report,'r')
@@ -46,9 +58,6 @@ def calculate_similarity(set_a, set_b):
     return { 'jaccard_similarity': jaccard_similarity, 'jaccard_with_interiority': jaccard_with_interiority }
 
 
-# set_a = find_cves(vlndb_1)
-# set_b = find_cves(vlndb_2)
-# result = calculate_similarity(set_a, set_b)
 def lets_go():
     databases = parse_chosen_databases()
     for database in databases:
@@ -69,6 +78,7 @@ def lets_go():
             i += 1
 
     print(simis)
+    os.system('rm vlndb_*')
 
 parser = argparse.ArgumentParser(description='Checks image and generates report accordingly')
 parser.add_argument('--vulndb','-db', type=str,
